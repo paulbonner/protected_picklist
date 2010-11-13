@@ -1,0 +1,23 @@
+protected_picklist enhances the has_many relationship to prevent destruction of a model object when a dependent table holds a reference to the object —
+
+For example, consider a class Hatsize defined as follows:
+
+class HatSize < ActiveRecord::Base
+  has_many :users
+  has_many :hats
+end
+
+Imagine too that there is a HatSize record with these properties: {:id=>1, :size=>7}, and a User record with these properties {:name=>"Homer", :hat_size=>1} and a Hat record with these properties  {:name=>"Fedora", :hat_size=>1}. ActiveRecord does nothing to prevent you from destroying the HatSize record, even though doing so will invalidate the User and Hat records.
+
+protected_picklist prevents this issue. Define your HatSize model as follows:  
+
+class HatSize < ActiveRecord::Base
+  include ProtectedPicklist
+  has_many_dependents :users
+  has_many_dependents :hats
+end
+
+Any attempt to delete a HatSize instance referred to by a dependent class will throw a LookupItemInUse exception.
+
+See lib/protected_picklist.rb for all the relevant code.
+

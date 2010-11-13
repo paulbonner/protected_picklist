@@ -1,0 +1,24 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: Small
+  id: 1
+
+two:
+  name: Tiny
+  id: 2
+
+three:
+  name: Fits All
+  id: 3
+
+four:
+  name: Normal
+  id: 4
+
+five:
+  name: Fathead
+  id: 5
+
+  
+  
